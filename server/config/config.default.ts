@@ -6,4 +6,14 @@ export default {
   koa: {
     port: 7001,
   },
+  staticFile: {
+    dirs: {
+      default: {
+        // remix.config.js publicPath
+        prefix: '/build/',
+        // remix.config.js assetsBuildDirectory
+        dir: 'public/build',
+      },
+    },
+  },
 } as MidwayConfig;

@@ -10,6 +10,7 @@
     "@midwayjs/info": "^3.12.0",
     "@midwayjs/koa": "^3.12.0",
     "@midwayjs/logger": "^2.14.0",
+    "@midwayjs/static-file": "^3.12.10",
     "@midwayjs/validate": "^3.12.0",
     "@remix-run/node": "^2.2.0",
     "@remix-run/react": "^2.2.0",
@@ -38,7 +39,9 @@
   },
   "scripts": {
     "start": "NODE_ENV=production node ./bootstrap.js",
-    "dev": "cross-env NODE_ENV=local midway-bin dev --ts",
+    "dev": "run-p \"dev:*\"",
+    "dev:remix": "remix watch",
+    "dev:midway": "cross-env NODE_ENV=local midway-bin dev --sourceDir server --ts",
     "test": "midway-bin test --ts",
     "cov": "midway-bin cov --ts",
     "lint": "mwts check",

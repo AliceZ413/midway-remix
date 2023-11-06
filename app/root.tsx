@@ -2,7 +2,7 @@
  * the Root Route
  * it will be a global layout in your entire app
  */
-import { Links, Meta, Outlet, Scripts } from '@remix-run/react';
+import { Links, LiveReload, Meta, Outlet, Scripts } from '@remix-run/react';
 import * as React from 'react';
 
 export default function App() {
@@ -14,10 +14,11 @@ export default function App() {
         <Links />
       </head>
       <body>
-        <h1>Hello world!</h1>
+        <h1>Hello world!5</h1>
         <Outlet />
 
         <Scripts />
+        <LiveReload />
       </body>
     </html>
   );

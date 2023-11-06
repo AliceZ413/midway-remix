@@ -16,3 +16,4 @@ run/
 .cache/
 .history/
 build/
+server/remix
