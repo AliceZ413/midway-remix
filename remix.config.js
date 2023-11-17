@@ -1,5 +1,7 @@
 /** @type {import('@remix-run/dev').AppConfig} */
 module.exports = {
-  serverBuildPath: 'server/remix/index.js',
   serverModuleFormat: 'cjs',
+  dev: {
+    port: 8002, // 默认的ws不是这个，需要指定8002
+  },
 };

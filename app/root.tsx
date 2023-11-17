@@ -14,11 +14,10 @@ export default function App() {
         <Links />
       </head>
       <body>
-        <h1>Hello world!5</h1>
         <Outlet />
 
         <Scripts />
-        <LiveReload />
+        {process.env.NODE_ENV !== 'production' && <LiveReload />}
       </body>
     </html>
   );

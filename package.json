@@ -14,40 +14,45 @@
     "@midwayjs/validate": "^3.12.0",
     "@remix-run/node": "^2.2.0",
     "@remix-run/react": "^2.2.0",
-    "@remix-run/serve": "^2.2.0",
     "isbot": "latest",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "remix-koa-adapter": "^1.1.0"
   },
   "devDependencies": {
     "@midwayjs/cli": "^2.0.0",
     "@midwayjs/mock": "^3.12.0",
     "@remix-run/dev": "^2.2.0",
     "@types/jest": "^29.2.0",
-    "@types/koa": "^2.13.4",
+    "@types/koa": "^2.13.11",
     "@types/node": "14",
     "@types/react": "^18.2.35",
     "@types/react-dom": "^18.2.14",
     "cross-env": "^6.0.0",
     "jest": "^29.2.2",
     "mwts": "^1.3.0",
+    "mwtsc": "^1.1.0",
+    "npm-run-all": "^4.1.5",
     "ts-jest": "^29.0.3",
-    "typescript": "~4.8.0"
+    "typescript": "~5.1.0"
   },
   "engines": {
     "node": ">=12.0.0"
   },
   "scripts": {
     "start": "NODE_ENV=production node ./bootstrap.js",
-    "dev": "run-p \"dev:*\"",
-    "dev:remix": "remix watch",
-    "dev:midway": "cross-env NODE_ENV=local midway-bin dev --sourceDir server --ts",
+    "dev": "run-p dev:remix dev:midway:app",
+    "dev:remix": "cross-env NODE_ENV=development remix watch",
+    "dev:midway:app": "cross-env NODE_ENV=development mwtsc --watch --run @midwayjs/mock/app",
+    "dev:midway:bootstrap": "cross-env NODE_ENV=development mwtsc --watch --run ./bootstrap.js",
     "test": "midway-bin test --ts",
     "cov": "midway-bin cov --ts",
     "lint": "mwts check",
     "lint:fix": "mwts fix",
     "ci": "npm run cov",
-    "build": "midway-bin build -c"
+    "build": "rm -rf dist && npm run build:remix && npm run build:midway",
+    "build:remix": "remix build",
+    "build:midway": "tsc"
   },
   "midway-bin-clean": [
     ".vscode/.tsbuildinfo",
