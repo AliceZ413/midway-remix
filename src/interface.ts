@@ -2,5 +2,13 @@
  * @description User-Service parameters
  */
 export interface IUserOptions {
-  uid: number;
+  username: string;
+}
+
+/**
+ * @description Auth-Service parameters
+ */
+export interface ILoginOptions {
+  username: string;
+  password: string;
 }

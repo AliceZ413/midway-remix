@@ -1,11 +1,14 @@
-import { Configuration, App } from '@midwayjs/core';
+import { join } from 'path';
+import { Configuration, App, ILifeCycle } from '@midwayjs/core';
 import * as koa from '@midwayjs/koa';
 import * as validate from '@midwayjs/validate';
 import * as info from '@midwayjs/info';
-import { join } from 'path';
 import * as staticFile from '@midwayjs/static-file';
-// import { DefaultErrorFilter } from './filter/default.filter';
-// import { NotFoundFilter } from './filter/notfound.filter';
+import * as typeorm from '@midwayjs/typeorm';
+import * as jwt from '@midwayjs/jwt';
+import * as passport from '@midwayjs/passport';
+import { RequestErrorFilter } from './filter/4xx.filter';
+import { ServerErrorFilter } from './filter/5xx.filter';
 import { ReportMiddleware } from './middleware/report.middleware';
 import { RemixMiddleware } from './middleware/remix.middleware';
 
@@ -14,6 +17,9 @@ import { RemixMiddleware } from './middleware/remix.middleware';
     koa,
     validate,
     staticFile,
+    typeorm,
+    jwt,
+    passport,
     {
       component: info,
       enabledEnvironment: ['local'],
@@ -21,7 +27,7 @@ import { RemixMiddleware } from './middleware/remix.middleware';
   ],
   importConfigs: [join(__dirname, './config')],
 })
-export class MainConfiguration {
+export class MainConfiguration implements ILifeCycle {
   @App('koa')
   app: koa.Application;
 
@@ -29,6 +35,6 @@ export class MainConfiguration {
     // add middleware
     this.app.useMiddleware([ReportMiddleware, RemixMiddleware]);
     // add filter
-    // this.app.useFilter([NotFoundFilter, DefaultErrorFilter]);
+    this.app.useFilter([RequestErrorFilter, ServerErrorFilter]);
   }
 }

@@ -16,6 +16,7 @@ export class RemixMiddleware implements IMiddleware<Context, NextFunction> {
       return remixService.createRequestHandler({
         build: require(this.remixHandlerPath) as ServerBuild,
         mode: process.env.NODE_ENV,
+        getLoadContext: () => ({}),
       })(ctx, next);
     };
   }
