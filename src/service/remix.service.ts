@@ -8,9 +8,7 @@ import {
   writeReadableStreamToWritable,
 } from '@remix-run/node';
 
-type GetLoadContextFunction = (
-  ctx: Context
-) => Promise<AppLoadContext> | AppLoadContext;
+type GetLoadContextFunction = (ctx: Context) => Promise<AppLoadContext> | AppLoadContext;
 
 type RequestHandler = (ctx: Context, next: NextFunction) => Promise<void>;
 
@@ -46,8 +44,7 @@ export class RemixService {
         const request = this.createRemixRequest(ctx);
         const loadContext = await getLoadContext?.(ctx);
 
-        const criticalCss =
-          mode === 'production' ? null : ctx.locals.__remixDevCriticalCss;
+        const criticalCss = mode === 'production' ? null : ctx.locals.__remixDevCriticalCss;
 
         const response = await handleRequest(
           request,
@@ -56,7 +53,7 @@ export class RemixService {
             ? {
                 __criticalCss: criticalCss,
               }
-            : undefined
+            : undefined,
         );
 
         await this.sendRemixResponse(ctx, response);
@@ -107,10 +104,7 @@ export class RemixService {
     return headers;
   }
 
-  private async sendRemixResponse(
-    ctx: Context,
-    nodeResposne: Response
-  ): Promise<void> {
+  private async sendRemixResponse(ctx: Context, nodeResposne: Response): Promise<void> {
     ctx.message = nodeResposne.statusText;
     ctx.status = nodeResposne.status;
 
@@ -118,9 +112,7 @@ export class RemixService {
       ctx.append(key, value);
     }
 
-    if (
-      nodeResposne.headers.get('Context-Type')?.match(/text\/event-stream/i)
-    ) {
+    if (nodeResposne.headers.get('Context-Type')?.match(/text\/event-stream/i)) {
       ctx.flushHeaders();
     }
 

@@ -10,9 +10,7 @@ export class RemixMiddleware implements IMiddleware<Context, NextFunction> {
 
   resolve() {
     return async (ctx: Context, next: NextFunction) => {
-      const remixService = await ctx.requestContext.getAsync<RemixService>(
-        RemixService
-      );
+      const remixService = await ctx.requestContext.getAsync<RemixService>(RemixService);
       remixService.purgeRequireCacheInDev(this.remixHandlerPath);
 
       return remixService.createRequestHandler({
