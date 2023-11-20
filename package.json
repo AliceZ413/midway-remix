@@ -16,8 +16,7 @@
     "@remix-run/react": "^2.2.0",
     "isbot": "latest",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "remix-koa-adapter": "^1.1.0"
+    "react-dom": "^18.2.0"
   },
   "devDependencies": {
     "@midwayjs/cli": "^2.0.0",
@@ -51,8 +50,8 @@
     "lint:fix": "mwts fix",
     "ci": "npm run cov",
     "build": "rm -rf dist && npm run build:remix && npm run build:midway",
-    "build:remix": "remix build",
-    "build:midway": "tsc"
+    "build:remix": "cross-env NODE_ENV=production remix build",
+    "build:midway": "cross-env NODE_ENV=production tsc"
   },
   "midway-bin-clean": [
     ".vscode/.tsbuildinfo",
