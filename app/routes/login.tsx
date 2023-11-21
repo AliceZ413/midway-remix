@@ -1,9 +1,10 @@
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
 import { Button, Form, Input } from 'antd';
 import * as React from 'react';
+import { useNavigate } from '@remix-run/react';
 
 import styles from '../styles/login.module.css';
-import { useNavigate } from '@remix-run/react';
+import { login } from '../utils/webapi';
 
 type TypeLogin = {
   username: string;
@@ -14,19 +15,8 @@ export default function LoginPage() {
   const [form] = Form.useForm<TypeLogin>();
   const navigate = useNavigate();
   const handleSubmit = (value: TypeLogin) => {
-    fetch('/api/auth/login', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        username: value.username,
-        password: value.password,
-      }),
-    })
-      .then((res) => res.json())
+    login(value.username, value.password)
       .then((res) => {
-        console.log(res);
         if (res.success) {
           localStorage.setItem('access_token', res.access_token);
           localStorage.setItem('user_info', JSON.stringify(res.user_info));

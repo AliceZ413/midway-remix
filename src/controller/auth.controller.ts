@@ -3,9 +3,13 @@ import { LoginDto } from '../dto/auth.dto';
 import { AuthService } from '../service/auth.service';
 import { UnauthorizedError } from '@midwayjs/core/dist/error/http';
 import { JwtPassportMiddleware } from '../middleware/jwt.midlleware';
+import { Context } from '@midwayjs/koa';
 
 @Controller('/api/auth')
 export class AuthController {
+  @Inject()
+  private readonly ctx: Context;
+
   @Inject()
   private authService: AuthService;
 
@@ -15,17 +19,13 @@ export class AuthController {
     if (!user) {
       throw new UnauthorizedError();
     }
-    const token = await this.authService.signToken({
-      id: user.id,
-      username: user.username,
-    });
+    this.ctx.session.user = user;
     return {
       success: true,
       user_info: {
         id: user.id,
         username: user.username,
       },
-      access_token: token,
     };
   }
 
