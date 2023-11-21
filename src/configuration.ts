@@ -11,6 +11,7 @@ import { RequestErrorFilter } from './filter/4xx.filter';
 import { ServerErrorFilter } from './filter/5xx.filter';
 import { ReportMiddleware } from './middleware/report.middleware';
 import { RemixMiddleware } from './middleware/remix.middleware';
+import { ResTransformMiddleware } from './middleware/res-transform.middleware';
 
 @Configuration({
   imports: [
@@ -33,7 +34,7 @@ export class MainConfiguration implements ILifeCycle {
 
   async onReady() {
     // add middleware
-    this.app.useMiddleware([ReportMiddleware, RemixMiddleware]);
+    this.app.useMiddleware([ReportMiddleware, RemixMiddleware, ResTransformMiddleware]);
     // add filter
     this.app.useFilter([RequestErrorFilter, ServerErrorFilter]);
   }

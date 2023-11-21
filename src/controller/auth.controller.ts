@@ -21,7 +21,6 @@ export class AuthController {
     }
     this.ctx.session.user = user;
     return {
-      success: true,
       user_info: {
         id: user.id,
         username: user.username,
