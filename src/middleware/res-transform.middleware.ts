@@ -17,4 +17,8 @@ export class ResTransformMiddleware implements IMiddleware<Context, NextFunction
       };
     };
   }
+
+  match(ctx: Context) {
+    return ctx.path.indexOf('/api') !== -1;
+  }
 }
