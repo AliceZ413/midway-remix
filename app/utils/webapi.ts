@@ -6,3 +6,7 @@ export const login = async (username: string, password: string) => {
     password,
   });
 };
+
+export const logout = async () => {
+  return post('/auth/logout');
+};

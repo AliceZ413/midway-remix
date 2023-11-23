@@ -2,8 +2,8 @@ import { Body, Controller, Get, Inject, Post } from '@midwayjs/core';
 import { LoginDto } from '../dto/auth.dto';
 import { AuthService } from '../service/auth.service';
 import { UnauthorizedError } from '@midwayjs/core/dist/error/http';
-import { JwtPassportMiddleware } from '../middleware/jwt.midlleware';
 import { Context } from '@midwayjs/koa';
+import { ProtectedMiddleware } from '../middleware/protected.middleware';
 
 @Controller('/api/auth')
 export class AuthController {
@@ -19,7 +19,10 @@ export class AuthController {
     if (!user) {
       throw new UnauthorizedError();
     }
-    this.ctx.session.user = user;
+    this.ctx.session.user = {
+      id: user.id,
+      username: user.username,
+    };
     return {
       user_info: {
         id: user.id,
@@ -28,8 +31,14 @@ export class AuthController {
     };
   }
 
-  @Get('/jwtProtected', { middleware: [JwtPassportMiddleware] })
+  @Get('/jwtProtected', { middleware: [ProtectedMiddleware] })
   async jwtProfile() {
+    return {};
+  }
+
+  @Post('/logout')
+  async logout() {
+    this.ctx.session = null;
     return {};
   }
 }
