@@ -2,7 +2,7 @@ import { Catch, MidwayHttpError } from '@midwayjs/core';
 import { BadRequestError, ForbiddenError, NotFoundError, UnauthorizedError } from '@midwayjs/core/dist/error/http';
 
 @Catch([UnauthorizedError, BadRequestError, ForbiddenError, NotFoundError])
-export class RequestErrorFilter {
+export class ClientErrorFilter {
   async catch(err: MidwayHttpError) {
     return {
       success: false,

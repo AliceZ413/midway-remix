@@ -12,13 +12,9 @@ export default {
         database: 'test_for_remix',
         synchronize: true,
         logging: false,
-        entities: ['**/entity/*.entity{.ts,.js}'],
+        entities: ['entity/*.entity{.ts,.js}'],
       },
     },
-  },
-  jwt: {
-    secret: 'JWT_SECRET',
-    expiresIn: '60s',
   },
   passport: {
     session: false,

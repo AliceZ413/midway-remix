@@ -1,9 +1,8 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
-import { BaseEntity } from './base';
+import { Column, Entity, Index, PrimaryGeneratedColumn } from 'typeorm';
+import { BaseEntity } from '../common/base-entity';
 
-@Entity({
-  name: 'users',
-})
+@Entity('users')
+@Index(['username'], { unique: true })
 export class User extends BaseEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string;
@@ -13,4 +12,9 @@ export class User extends BaseEntity {
 
   @Column('varchar')
   password: string;
+
+  @Column('simple-array', {
+    nullable: true,
+  })
+  role: string[];
 }

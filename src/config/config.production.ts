@@ -10,15 +10,11 @@ export default {
         username: 'root',
         password: 'AliceZ0317',
         database: 'test_for_remix',
-        synchronize: true,
+        synchronize: false,
         logging: false,
-        entities: ['**/entity/*.entity{.ts,.js}'],
+        entities: ['entity/*.entity{.ts,.js}'],
       },
     },
-  },
-  jwt: {
-    secret: 'JWT_SECRET',
-    expiresIn: '60s',
   },
   passport: {
     session: false,
