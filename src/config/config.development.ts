@@ -16,10 +16,6 @@ export default {
       },
     },
   },
-  jwt: {
-    secret: 'JWT_SECRET',
-    expiresIn: '60s',
-  },
   passport: {
     session: false,
   },

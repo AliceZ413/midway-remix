@@ -2,16 +2,14 @@ import { Inject, Provide } from '@midwayjs/core';
 import { UserService } from './user.service';
 import { createHash } from 'crypto';
 import { omit } from 'lodash';
-import { LoginDto } from '../dto/auth.dto';
-import { JwtService } from '@midwayjs/jwt';
+import { LoginDto } from '../controller/dto/auth.dto';
 
 @Provide()
 export class AuthService {
   @Inject()
   private userService: UserService;
 
-  @Inject()
-  private jwtService: JwtService;
+  async register() {}
 
   async login(loginDto: LoginDto) {
     const user = await this.userService.getUser({ username: loginDto.username });
@@ -21,10 +19,5 @@ export class AuthService {
       return result;
     }
     return null;
-  }
-
-  async signToken(payload: any) {
-    const token = await this.jwtService.sign(payload);
-    return token;
   }
 }

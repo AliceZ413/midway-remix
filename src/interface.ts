@@ -1,3 +1,11 @@
+import { UserContext } from './common/user-context';
+
+declare module '@midwayjs/core' {
+  interface Context {
+    userContext: UserContext;
+  }
+}
+
 /**
  * @description User-Service parameters
  */
