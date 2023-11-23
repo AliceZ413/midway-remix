@@ -7,11 +7,12 @@ import * as staticFile from '@midwayjs/static-file';
 import * as typeorm from '@midwayjs/typeorm';
 import * as jwt from '@midwayjs/jwt';
 import * as passport from '@midwayjs/passport';
-import { RequestErrorFilter } from './filter/4xx.filter';
-import { ServerErrorFilter } from './filter/5xx.filter';
+import { DefaultErrorFilter } from './filter/default.filter';
+import { ClientErrorFilter } from './filter/client-error.filter';
+import { ServerErrorFilter } from './filter/server-error.filter';
 import { ReportMiddleware } from './middleware/report.middleware';
 import { RemixMiddleware } from './middleware/remix.middleware';
-import { ResTransformMiddleware } from './middleware/res-transform.middleware';
+import { FormatMiddleware } from './middleware/format.middleware';
 
 @Configuration({
   imports: [
@@ -34,8 +35,8 @@ export class MainConfiguration implements ILifeCycle {
 
   async onReady() {
     // add middleware
-    this.app.useMiddleware([ReportMiddleware, RemixMiddleware, ResTransformMiddleware]);
+    this.app.useMiddleware([ReportMiddleware, RemixMiddleware, FormatMiddleware]);
     // add filter
-    this.app.useFilter([RequestErrorFilter, ServerErrorFilter]);
+    this.app.useFilter([DefaultErrorFilter, ClientErrorFilter, ServerErrorFilter]);
   }
 }
