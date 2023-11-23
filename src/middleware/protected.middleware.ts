@@ -4,28 +4,18 @@
 
 import { IMiddleware, Middleware } from '@midwayjs/core';
 import { Context, NextFunction } from '@midwayjs/koa';
+import { UnauthorizedError } from '@midwayjs/core/dist/error/http';
+import { UserContext } from '../common/user-context';
 
 @Middleware()
 export class ProtectedMiddleware implements IMiddleware<Context, NextFunction> {
   resolve() {
     return async (ctx: Context, next: NextFunction) => {
-      // if (!ctx.headers['authorization']) {
-      //   throw new UnauthorizedError('缺少凭证');
-      // }
-      // const parts = ctx.get('authorization').trim().split(' ');
-      // if (parts.length !== 2) {
-      //   throw new UnauthorizedError('无效凭证');
-      // }
-      // const [scheme, token] = parts;
-      // if (!/^Bearer$/i.test(scheme)) {
-      //   throw new UnauthorizedError('无效凭证');
-      // }
-      // // 校验token
-      // const jwt = await this.jwtService.verify(token, { complete: true });
-      // const payload = jwt['payload'];
-      // if (payload.username !== ctx.userContext.username) {
-      //   throw new UnauthorizedError('无效凭证');
-      // }
+      const userContext = ctx.session.userContext as UserContext;
+
+      if (!userContext || !userContext.userId || !userContext.username) {
+        throw new UnauthorizedError('身份验证失败');
+      }
 
       return next();
     };
@@ -33,7 +23,7 @@ export class ProtectedMiddleware implements IMiddleware<Context, NextFunction> {
 
   match(ctx: Context) {
     const prefix = '/api',
-      ignore = ['/api/login'];
+      ignore = ['/api/auth/login'];
     const exist = ignore.find((item) => item.match(ctx.path));
     return ctx.path.indexOf(prefix) === 0 && !exist;
   }

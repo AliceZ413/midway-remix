@@ -1,25 +1,20 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, Index, PrimaryGeneratedColumn } from 'typeorm';
 import { BaseEntity } from '../common/base-entity';
 
 @Entity('users')
+@Index(['username'], { unique: true })
 export class User extends BaseEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column('varchar', {
-    nullable: true,
-    unique: true,
-  })
+  @Column('varchar')
   username: string;
 
-  @Column('varchar', {
-    nullable: true,
-  })
+  @Column('varchar')
   password: string;
 
-  @Column('array', {
+  @Column('simple-array', {
     nullable: true,
-    default: ['user'],
   })
-  role: Array<string>;
+  role: string[];
 }

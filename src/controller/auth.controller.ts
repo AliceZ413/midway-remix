@@ -1,9 +1,10 @@
 import { Body, Controller, Get, Inject, Post } from '@midwayjs/core';
 import { LoginDto } from './dto/auth.dto';
 import { AuthService } from '../service/auth.service';
-import { UnauthorizedError } from '@midwayjs/core/dist/error/http';
 import { Context } from '@midwayjs/koa';
 import { LoginVO } from './vo/auth.vo';
+import { UnauthorizedError } from '@midwayjs/core/dist/error/http';
+import { UserContext } from '../common/user-context';
 
 @Controller('/api/auth')
 export class AuthController {
@@ -16,19 +17,21 @@ export class AuthController {
   @Post('/login')
   async login(@Body() loginDto: LoginDto): Promise<LoginVO> {
     const user = await this.authService.login(loginDto);
+
     if (!user) {
       throw new UnauthorizedError('用户名或密码错误');
     }
-    this.ctx.session.user = {
+
+    const userContext = new UserContext(user.id, user.username);
+    this.ctx.session.userContext = userContext;
+
+    const vo = new LoginVO();
+    vo.user_info = {
       userId: user.id,
       username: user.username,
     };
-    return {
-      user_info: {
-        userId: user.id,
-        username: user.username,
-      },
-    };
+
+    return vo;
   }
 
   @Get('/jwtProtected')
