@@ -4,6 +4,7 @@
   "description": "Midway.js + Remix!",
   "private": true,
   "dependencies": {
+    "@ant-design/icons": "^5.2.6",
     "@midwayjs/bootstrap": "^3.12.5",
     "@midwayjs/core": "^3.12.3",
     "@midwayjs/decorator": "^3.12.3",
@@ -17,6 +18,7 @@
     "@remix-run/css-bundle": "^2.3.0",
     "@remix-run/node": "^2.2.0",
     "@remix-run/react": "^2.2.0",
+    "antd": "^5.11.3",
     "bcryptjs": "^2.4.3",
     "isbot": "latest",
     "lodash": "^4.17.21",
@@ -27,6 +29,7 @@
     "typeorm": "^0.3.17"
   },
   "devDependencies": {
+    "@ant-design/static-style-extract": "^1.0.2",
     "@midwayjs/cli": "^2.0.0",
     "@midwayjs/mock": "^3.12.10",
     "@remix-run/dev": "^2.2.0",
@@ -64,7 +67,7 @@
     "prepare": "husky install",
     "predev": "ts-node --project ./scripts/tsconfig.node.json ./scripts/genAntdStyle.tsx",
     "prebuild": "rimraf dist build && cross-env NODE_ENV=production ts-node --project ./scripts/tsconfig.node.json ./scripts/genAntdStyle.tsx",
-    "start": "NODE_ENV=production node --inspect ./bootstrap.js",
+    "start": "NODE_ENV=production node ./bootstrap.js",
     "dev": "run-p dev:remix dev:midway:app",
     "dev:remix": "cross-env NODE_ENV=development remix watch",
     "dev:midway:app": "cross-env NODE_ENV=development mwtsc --watch --run @midwayjs/mock/app",
