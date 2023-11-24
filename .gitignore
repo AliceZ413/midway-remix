@@ -17,3 +17,4 @@ run/
 .history/
 build/
 server/remix
+.env
