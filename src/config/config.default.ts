@@ -39,7 +39,7 @@ export default {
         password: process.env.DB_PASSWORD,
         database: process.env.DB_DATABASE,
         synchronize: process.env.NODE_ENV !== 'production',
-        logging: false,
+        logging: process.env.NODE_ENV !== 'production',
         entities: ['entity/*.entity{.ts,.js}'],
       },
     },
