@@ -1,10 +1,13 @@
 {
   "compileOnSave": true,
   "compilerOptions": {
-    "jsx": "react",
-    "target": "es2018",
-    "module": "commonjs",
+    "lib": ["DOM", "DOM.Iterable", "ES2018"],
+    "jsx": "react-jsx",
+    "target": "ES2018",
+    "module": "CommonJS",
     "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "incremental": true,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
     "inlineSourceMap": true,
@@ -15,9 +18,9 @@
     "pretty": true,
     "declaration": true,
     "forceConsistentCasingInFileNames": true,
-    "typeRoots": ["./typings", "./node_modules/@types"],
+    "isolatedModules": true,
     "outDir": "dist"
   },
-  "include": ["src"],
-  "exclude": ["dist", "node_modules", "test"]
+  "include": ["**/*.ts", "**/*.tsx", "remix.env.d.ts"],
+  "exclude": ["dist", "node_modules", "test", "scripts", "app"]
 }

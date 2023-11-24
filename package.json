@@ -1,6 +1,6 @@
 {
   "name": "midway-remix-template",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Midway.js + Remix!",
   "private": true,
   "dependencies": {
@@ -68,7 +68,7 @@
     "predev": "ts-node --project ./scripts/tsconfig.node.json ./scripts/genAntdStyle.tsx",
     "prebuild": "rimraf dist build && cross-env NODE_ENV=production ts-node --project ./scripts/tsconfig.node.json ./scripts/genAntdStyle.tsx",
     "start": "NODE_ENV=production node ./bootstrap.js",
-    "dev": "run-p dev:remix dev:midway:app",
+    "dev": "run-p dev:remix dev:midway:bootstrap",
     "dev:remix": "cross-env NODE_ENV=development remix watch",
     "dev:midway:app": "cross-env NODE_ENV=development mwtsc --watch --run @midwayjs/mock/app",
     "dev:midway:bootstrap": "cross-env NODE_ENV=development mwtsc --watch --run ./bootstrap.js",
@@ -82,7 +82,7 @@
     "ci": "npm run cov",
     "build": "rm -rf dist && npm run build:remix && npm run build:midway",
     "build:remix": "cross-env NODE_ENV=production remix build",
-    "build:midway": "cross-env NODE_ENV=production tsc"
+    "build:midway": "cross-env NODE_ENV=production tsc -p ./tsconfig.build.json"
   },
   "lint-staged": {
     "src/**/*.ts": ""
