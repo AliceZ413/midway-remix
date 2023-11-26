@@ -5,4 +5,5 @@ module.exports = {
   singleQuote: true,
   jsxSingleQuote: true,
   proseWrap: 'preserve',
+  endOfLine: 'lf',
 };

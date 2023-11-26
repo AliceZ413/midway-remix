@@ -6,20 +6,17 @@ import * as info from '@midwayjs/info';
 import * as staticFile from '@midwayjs/static-file';
 import * as typeorm from '@midwayjs/typeorm';
 import * as session from '@midwayjs/session';
+import * as security from '@midwayjs/security';
 
-import { DefaultErrorFilter } from './filter/default.filter';
-import { ClientErrorFilter } from './filter/client-error.filter';
-import { ServerErrorFilter } from './filter/server-error.filter';
-
-import { ReportMiddleware } from './middleware/report.middleware';
-import { RemixMiddleware } from './middleware/remix.middleware';
-import { FormatMiddleware } from './middleware/format.middleware';
-import { ProtectedMiddleware } from './middleware/protected.middleware';
 import { MemorySessionStore } from './service/session-store.service';
+
+import { middlewares } from './middleware';
+import { filters } from './filter';
 
 @Configuration({
   imports: [
     koa,
+    security,
     validate,
     staticFile,
     typeorm,
@@ -45,8 +42,13 @@ export class MainConfiguration implements ILifeCycle {
     this.sessionStoreManager.setSessionStore(this.memoryStore);
 
     // add middleware
-    this.app.useMiddleware([ProtectedMiddleware, ReportMiddleware, RemixMiddleware, FormatMiddleware]);
+    this.app.useMiddleware([...middlewares]);
     // add filter
-    this.app.useFilter([DefaultErrorFilter, ClientErrorFilter, ServerErrorFilter]);
+    this.app.useFilter([...filters]);
+  }
+
+  async onServerReady(): Promise<void> {
+    this.app.setAttr('runTime', Date.now());
+    this.app.getLogger().warn('当期服务环境运行配置 => %s', this.app.getEnv());
   }
 }

@@ -1,4 +1,5 @@
 import { MidwayConfig } from '@midwayjs/core';
+// eslint-disable-next-line node/no-unpublished-import
 import * as dotenv from 'dotenv';
 
 dotenv.config();
