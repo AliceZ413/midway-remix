@@ -4,10 +4,9 @@
  */
 import { Links, LiveReload, Meta, Outlet, Scripts, ScrollRestoration } from '@remix-run/react';
 import type { LinksFunction, MetaFunction } from '@remix-run/node';
-import * as React from 'react';
+import { cssBundleHref } from '@remix-run/css-bundle';
 import resetStyle from 'antd/dist/reset.css';
 import antdStyle from './styles/antd.min.css';
-import { cssBundleHref } from '@remix-run/css-bundle';
 
 export const links: LinksFunction = () => {
   const result = [

@@ -2,7 +2,6 @@ import { createApp, close, createHttpRequest } from '@midwayjs/mock';
 import { Framework } from '@midwayjs/koa';
 
 describe('test/controller/home.test.ts', () => {
-
   it('should POST /api/get_user', async () => {
     // create app
     const app = await createApp<Framework>();

@@ -19,8 +19,10 @@
     "declaration": true,
     "forceConsistentCasingInFileNames": true,
     "isolatedModules": true,
-    "outDir": "dist"
+    "outDir": "dist",
+    "baseUrl": ".",
+    "typeRoots": ["./typings", "./node_modules/@types"]
   },
   "include": ["**/*.ts", "**/*.tsx", "remix.env.d.ts"],
-  "exclude": ["dist", "node_modules", "test", "scripts", "app"]
+  "exclude": ["dist", "node_modules", "test", "scripts"]
 }
