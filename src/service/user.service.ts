@@ -1,6 +1,6 @@
 import { Provide } from '@midwayjs/core';
 import { InjectEntityModel } from '@midwayjs/typeorm';
-import { User } from '../entity/user.entity';
+import { User } from '../model/entity/user.entity';
 import { Repository } from 'typeorm';
 import { encrypt } from '../utils/pwd-helper';
 

@@ -1,6 +1,6 @@
 import { Inject, Provide } from '@midwayjs/core';
 import { UserService } from './user.service';
-import { LoginDto } from '../controller/dto/auth.dto';
+import { LoginDto } from '../model/dto/auth.dto';
 import { decrypt } from '../utils/pwd-helper';
 
 @Provide()

@@ -1,8 +1,8 @@
 import { Body, Controller, Get, Inject, Post } from '@midwayjs/core';
-import { LoginDto } from './dto/auth.dto';
+import { LoginDto } from '../model/dto/auth.dto';
 import { AuthService } from '../service/auth.service';
 import { Context } from '@midwayjs/koa';
-import { LoginVO } from './vo/auth.vo';
+import { LoginVO } from '../model/vo/auth.vo';
 import { UnauthorizedError } from '@midwayjs/core/dist/error/http';
 import { UserContext } from '../common/user-context';
 

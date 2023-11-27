@@ -1,7 +1,7 @@
 import { Config, Provide, Scope, ScopeEnum } from '@midwayjs/core';
 import { SessionStore } from '@midwayjs/session';
 import { InjectEntityModel } from '@midwayjs/typeorm';
-import { Session } from '../entity/session.entity';
+import { Session } from '../model/entity/session.entity';
 import { Repository } from 'typeorm';
 
 @Provide()

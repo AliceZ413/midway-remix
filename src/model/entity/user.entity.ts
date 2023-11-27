@@ -1,5 +1,5 @@
 import { Column, Entity, Index, PrimaryGeneratedColumn } from 'typeorm';
-import { BaseEntity } from '../common/base-entity';
+import { BaseEntity } from '../../common/base-entity';
 
 @Entity('users')
 @Index(['username'], { unique: true })
