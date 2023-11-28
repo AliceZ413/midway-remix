@@ -1,9 +1,5 @@
 import { MidwayConfig } from '@midwayjs/core';
 
 export default {
-  midwayLogger: {
-    default: {
-      consoleLevel: 'all',
-    },
-  },
+  midwayLogger: {},
 } as MidwayConfig;

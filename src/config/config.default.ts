@@ -41,7 +41,7 @@ export default {
         database: process.env.DB_DATABASE,
         synchronize: process.env.NODE_ENV !== 'production',
         logging: process.env.NODE_ENV !== 'production',
-        entities: ['entity/*.entity{.ts,.js}'],
+        entities: ['model/entity/*.entity{.ts,.js}'],
       },
     },
   },
