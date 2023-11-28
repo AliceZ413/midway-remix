@@ -31,6 +31,9 @@ export class AuthController {
       username: user.username,
     };
 
+    // 用户登录后刷新csrf token
+    this.ctx.rotateCsrfSecret();
+
     return vo;
   }
 

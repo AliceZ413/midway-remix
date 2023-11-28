@@ -6,7 +6,6 @@ import * as info from '@midwayjs/info';
 import * as staticFile from '@midwayjs/static-file';
 import * as typeorm from '@midwayjs/typeorm';
 import * as session from '@midwayjs/session';
-import * as security from '@midwayjs/security';
 
 import { MemorySessionStore } from './service/session-store.service';
 
@@ -16,7 +15,6 @@ import { filters } from './filter';
 @Configuration({
   imports: [
     koa,
-    security,
     validate,
     staticFile,
     typeorm,
