@@ -17,7 +17,7 @@ export class RemixMiddleware implements IMiddleware<Context, NextFunction> {
         build: require(this.remixHandlerPath) as ServerBuild,
         mode: process.env.NODE_ENV,
         getLoadContext: () => ({
-          user: ctx.session.user,
+          user: ctx.session.userContext,
         }),
       })(ctx, next);
     };

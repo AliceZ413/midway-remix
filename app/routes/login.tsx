@@ -16,12 +16,12 @@ export default function LoginPage() {
   const handleSubmit = (value: TypeLogin) => {
     login(value.username, value.password)
       .then((res) => {
-        if (res.success) {
-          localStorage.setItem('access_token', res.access_token);
-          localStorage.setItem('user_info', JSON.stringify(res.user_info));
+        if (res.code === 0) {
+          const { user_info } = res.data;
+          localStorage.setItem('user_info', JSON.stringify(user_info));
           navigate('/dashboard/home');
         } else {
-          console.log(res.message);
+          alert(res.message);
         }
       })
       .catch((err) => {

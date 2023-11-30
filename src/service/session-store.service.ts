@@ -15,7 +15,7 @@ export class MemorySessionStore extends SessionStore {
 
   async get(key: string) {
     const session = await this.sessionModel.findOneBy({ session_id: key });
-    return JSON.parse(session.session_data);
+    return session ? JSON.parse(session.session_data) : null;
   }
 
   async set(key: string, value: any) {

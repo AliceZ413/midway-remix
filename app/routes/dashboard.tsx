@@ -47,7 +47,7 @@ export default function Dashboard() {
 
   return (
     <Layout className={styles.page} hasSider>
-      <Sider trigger={null} collapsible collapsed={collapsed}>
+      <Sider theme='dark' trigger={null} collapsible collapsed={collapsed}>
         <div className={styles.logoBg}></div>
         <Menu
           theme='dark'
