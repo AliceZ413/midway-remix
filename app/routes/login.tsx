@@ -1,6 +1,5 @@
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
 import { Button, Form, Input } from 'antd';
-import * as React from 'react';
 import { useNavigate } from '@remix-run/react';
 
 import styles from '../styles/login.module.css';
