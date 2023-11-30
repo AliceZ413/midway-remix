@@ -5,6 +5,7 @@ import { Context } from '@midwayjs/koa';
 import { LoginVO } from '../model/vo/auth.vo';
 import { UnauthorizedError } from '@midwayjs/core/dist/error/http';
 import { UserContext } from '../common/user-context';
+import { Protected } from '../decorator/protected';
 
 @Controller('/api/auth')
 export class AuthController {
@@ -31,13 +32,11 @@ export class AuthController {
       username: user.username,
     };
 
-    // 用户登录后刷新csrf token
-    this.ctx.rotateCsrfSecret();
-
     return vo;
   }
 
   @Get('/jwtProtected')
+  @Protected()
   async jwtProfile() {
     return {};
   }
