@@ -5,6 +5,7 @@
   "private": true,
   "dependencies": {
     "@ant-design/icons": "^5.2.6",
+    "@ant-design/pro-components": "^2.6.43",
     "@midwayjs/bootstrap": "^3.12.5",
     "@midwayjs/core": "^3.12.3",
     "@midwayjs/decorator": "^3.12.3",
